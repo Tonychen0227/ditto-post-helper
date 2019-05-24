@@ -39,7 +39,6 @@ export const DepositPokemonView = ({ setDepositProp, children }) => {
             "Dusk Ball",
             "Heal Ball",
             "Quick Ball",
-            "Cherish Ball",
             "Other"
           ]}
         />
