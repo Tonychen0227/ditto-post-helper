@@ -4,11 +4,11 @@ import { StyledDropdown } from "../components/Dropdown";
 import { ColumnLayout } from "../layouts/column-layout";
 import { passEventValue } from "../utils/pass-event-value";
 
-export const PickADittoView = ({ setDittoNature, children }) => {
+export const PickADittoView = ({ setPlayerProp, setDittoNature, children }) => {
   return (
     <React.Fragment>
       <ColumnLayout>
-        <Typography variant="h4">Select a Ditto</Typography>
+        <Typography variant="h5">Select a Ditto</Typography>
         <StyledDropdown
           onChange={passEventValue(setDittoNature)}
           options={[
@@ -35,6 +35,12 @@ export const PickADittoView = ({ setDittoNature, children }) => {
           ]}
         />
       </ColumnLayout>
+      <Typography variant="h5">Select Your Game Version</Typography>
+      <StyledDropdown
+        onChange={passEventValue(setPlayerProp("game"))}
+        options={["ORAS", "XY", "SM", "USUM"]}
+      />
+
       <a
         href="https://www.reddit.com/r/morebreedingdittos/wiki/dittos"
         style={{ color: "#0277bd" }}

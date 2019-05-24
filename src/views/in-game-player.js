@@ -26,10 +26,6 @@ export const InGamePlayerView = ({ setPlayerProp, children }) => {
             "Chinese"
           ]}
         />
-        <StyledDropdown
-          onChange={passEventValue(setPlayerProp("game"))}
-          options={["ORAS", "XY", "SM", "USUM"]}
-        />
         <StyledTextField
           multiline
           label="Trainer description"
