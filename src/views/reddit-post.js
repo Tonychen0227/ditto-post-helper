@@ -6,6 +6,7 @@ import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import { StyledTextField } from "../components/TextField";
 import { ColumnLayout } from "../layouts/column-layout";
 import { copyToClipboard } from "../utils/copy-to-clipboard";
+import { withStyles } from "@material-ui/core";
 
 const ButtonWithTooltip = ({
   isTooltipOpen,
@@ -32,6 +33,12 @@ const ButtonWithTooltip = ({
           onClick={() =>
             copyToClipboard(textFieldRef) || setIsTooltipOpen(true)
           }
+          variant="contained"
+          style={{
+            margin: "5px",
+            backgroundColor: "#0277bd",
+            color: "#ffffff"
+          }}
         >
           {children}
         </Button>
