@@ -5,12 +5,13 @@
   "main": "index.js",
   "scripts": {
     "start": "parcel index.html",
-    "predeploy": "rm -rf dist && parcel build index.html",
+    "predeploy": "rm -rf dist && parcel build index.html --public-url /ditto-post-helper/",
     "deploy": "gh-pages -d dist"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "homepage": "http://shinysylveon04.github.io/ditto-post-helper",
   "dependencies": {
     "@material-ui/core": "^3.9.3",
     "@material-ui/icons": "^3.0.2",
