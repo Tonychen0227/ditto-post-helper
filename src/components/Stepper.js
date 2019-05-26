@@ -13,7 +13,11 @@ const styles = {
 
 const Stepper = ({ steps, activeStep, classes }) => {
   return (
-    <StepperContainer activeStep={activeStep} classes={classes}>
+    <StepperContainer
+      activeStep={activeStep}
+      classes={classes}
+      orientation="horizontal"
+    >
       {steps.map(label => (
         <Step key={label}>
           <StepLabel>{label}</StepLabel>
