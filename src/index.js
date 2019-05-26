@@ -93,7 +93,10 @@ const App = ({ classes }) => {
             >
               {stepButtons}
             </DepositPokemonView>
-            <InGamePlayerView setPlayerProp={setPlayerProp}>
+            <InGamePlayerView
+              setPlayerProp={setPlayerProp}
+              player={state.player}
+            >
               {stepButtons}
             </InGamePlayerView>
             <RedditPostView postText={postText} postTitle={postTitle}>

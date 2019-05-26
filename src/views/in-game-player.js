@@ -4,8 +4,54 @@ import { StyledDropdown } from "../components/Dropdown";
 import { StyledTextField } from "../components/TextField";
 import { ColumnLayout } from "../layouts/column-layout";
 import { passEventValue } from "../utils/pass-event-value";
+import { Gen7Messages } from "../utils/gen7-gts-messages";
+import { ORASTrainers } from "../utils/oras-trainers";
+import { getGameGen } from "../utils/get-game-generation";
 
-export const InGamePlayerView = ({ setPlayerProp, children }) => {
+const GTSMessageTextField = ({ setPlayerProp }) => (
+  <StyledTextField
+    label="GTS Message"
+    onChange={passEventValue(setPlayerProp("gtsMessage"))}
+  />
+);
+
+const GTSDropdown = ({ setPlayerProp }) => (
+  <StyledDropdown
+    onChange={passEventValue(setPlayerProp("gtsMessage"))}
+    options={Gen7Messages}
+  />
+);
+
+const GTSMessageInput = ({ game, setPlayerProp }) => {
+  const GTSMessageComponent =
+    getGameGen(game) === 6 ? GTSMessageTextField : GTSDropdown;
+
+  return <GTSMessageComponent setPlayerProp={setPlayerProp} />;
+};
+
+const TrainerTextField = ({ setPlayerProp }) => (
+  <StyledTextField
+    multiline
+    label="Trainer description"
+    onChange={passEventValue(setPlayerProp("trainerDescription"))}
+  />
+);
+
+const TrainerDropdown = ({ setPlayerProp }) => (
+  <StyledDropdown
+    onChange={passEventValue(setPlayerProp("trainerDescription"))}
+    options={ORASTrainers}
+  />
+);
+
+const TrainerDescriptionInput = ({ game, setPlayerProp }) => {
+  const TrainerDescription =
+    game === "ORAS" ? TrainerDropdown : TrainerTextField;
+
+  return <TrainerDescription setPlayerProp={setPlayerProp} />;
+};
+
+export const InGamePlayerView = ({ setPlayerProp, player, children }) => {
   return (
     <React.Fragment>
       <ColumnLayout>
@@ -26,19 +72,15 @@ export const InGamePlayerView = ({ setPlayerProp, children }) => {
             "Chinese"
           ]}
         />
-        <StyledTextField
-          multiline
-          label="Trainer description"
-          onChange={passEventValue(setPlayerProp("trainerDescription"))}
+        <TrainerDescriptionInput
+          game={player.game}
+          setPlayerProp={setPlayerProp}
         />
         <StyledTextField
           label="In game name"
           onChange={passEventValue(setPlayerProp("inGameName"))}
         />
-        <StyledTextField
-          label="GTS Mesage"
-          onChange={passEventValue(setPlayerProp("gtsMessage"))}
-        />
+        <GTSMessageInput game={player.game} setPlayerProp={setPlayerProp} />
         <StyledTextField
           label="3DS Region"
           onChange={passEventValue(setPlayerProp("consoleRegion"))}
