@@ -4,22 +4,20 @@ import { StyledDropdown } from "../components/Dropdown";
 import { StyledTextField } from "../components/TextField";
 import { ColumnLayout } from "../layouts/column-layout";
 import { passEventValue } from "../utils/pass-event-value";
+import { getGameGen } from "../utils/get-game-generation";
 
-export const DepositPokemonView = ({ setDepositProp, children }) => {
+const gen6Pokemon = ["Whismur", "Zubat"];
+
+const gen7Pokemon = ["Fomantis", "Poliwag", "Ledyba", "Spinarak"];
+
+export const DepositPokemonView = ({ setDepositProp, player, children }) => {
   return (
     <React.Fragment>
       <ColumnLayout>
         <Typography variant="h4">What Pokemon will you deposit?</Typography>
         <StyledDropdown
           onChange={passEventValue(setDepositProp("species"))}
-          options={[
-            "Fomantis",
-            "Poliwag",
-            "Ledyba",
-            "Spinarak",
-            "Whismur",
-            "Zubat"
-          ]}
+          options={getGameGen(player.game) === 6 ? gen6Pokemon : gen7Pokemon}
         />
         <StyledDropdown
           onChange={passEventValue(setDepositProp("ball"))}

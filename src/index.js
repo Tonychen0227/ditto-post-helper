@@ -87,7 +87,10 @@ const App = ({ classes }) => {
             >
               {stepButtons}
             </PickADittoView>
-            <DepositPokemonView setDepositProp={setDepositProp}>
+            <DepositPokemonView
+              setDepositProp={setDepositProp}
+              player={state.player}
+            >
               {stepButtons}
             </DepositPokemonView>
             <InGamePlayerView setPlayerProp={setPlayerProp}>
