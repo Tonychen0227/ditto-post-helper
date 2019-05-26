@@ -16,8 +16,8 @@ export const InGamePlayerView = ({ setPlayerProp, children }) => {
         <StyledDropdown
           onChange={passEventValue(setPlayerProp("language"))}
           options={[
-            "Japanese",
             "English",
+            "Japanese",
             "French",
             "Italian",
             "German",
