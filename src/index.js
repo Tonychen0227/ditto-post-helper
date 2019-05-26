@@ -81,7 +81,10 @@ const App = ({ classes }) => {
             index={state.activeStep}
             onChangeIndex={setActiveStep}
           >
-            <PickADittoView setDittoNature={setDittoNature}>
+            <PickADittoView
+              setDittoNature={setDittoNature}
+              setPlayerProp={setPlayerProp}
+            >
               {stepButtons}
             </PickADittoView>
             <DepositPokemonView setDepositProp={setDepositProp}>
