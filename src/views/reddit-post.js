@@ -6,7 +6,7 @@ import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import { StyledTextField } from "../components/TextField";
 import { ColumnLayout } from "../layouts/column-layout";
 import { copyToClipboard } from "../utils/copy-to-clipboard";
-import { withStyles } from "@material-ui/core";
+import FileCopyIcon from "@material-ui/icons/FileCopy";
 
 const ButtonWithTooltip = ({
   isTooltipOpen,
@@ -41,6 +41,7 @@ const ButtonWithTooltip = ({
           }}
         >
           {children}
+          <FileCopyIcon fontSize="small" style={{ marginLeft: "3px" }} />
         </Button>
       </Tooltip>
     </ClickAwayListener>
