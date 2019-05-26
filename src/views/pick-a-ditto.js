@@ -34,13 +34,12 @@ export const PickADittoView = ({ setPlayerProp, setDittoNature, children }) => {
             "HP Rock"
           ]}
         />
+        <Typography variant="h5">Select Your Game Version</Typography>
+        <StyledDropdown
+          onChange={passEventValue(setPlayerProp("game"))}
+          options={["ORAS", "XY", "SM", "USUM"]}
+        />
       </ColumnLayout>
-      <Typography variant="h5">Select Your Game Version</Typography>
-      <StyledDropdown
-        onChange={passEventValue(setPlayerProp("game"))}
-        options={["ORAS", "XY", "SM", "USUM"]}
-      />
-
       <a
         href="https://www.reddit.com/r/morebreedingdittos/wiki/dittos"
         style={{ color: "#0277bd" }}
