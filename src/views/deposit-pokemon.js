@@ -24,10 +24,10 @@ export const DepositPokemonView = ({ setDepositProp, children }) => {
         <StyledDropdown
           onChange={passEventValue(setDepositProp("ball"))}
           options={[
+            "Poké Ball",
             "Master Ball",
             "Ultra Ball",
             "Great Ball",
-            "Poké Ball",
             "Safari Ball",
             "Net Ball",
             "Dive Ball",
