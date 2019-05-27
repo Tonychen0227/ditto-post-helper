@@ -15,22 +15,22 @@ export const createPostText = ({ dittoNature, player, deposit }) => {
 
   return `[${gen}]
 
- * Ditto Requested: ${dittoType}
+ - Ditto Requested: ${dittoType}
  
  ---
  
- * Pokémon Deposited: ${deposit.species}
- * Nickname: ${deposit.nickname}
- * Pokeball: ${deposit.ball}
- * Gender: ${deposit.gender}
- * Level: ${deposit.level}
+ - Pokémon Deposited: ${deposit.species}
+ - Nickname: ${deposit.nickname}
+ - Pokeball: ${deposit.ball}
+ - Gender: ${deposit.gender}
+ - Level: ${deposit.level}
  
  ---
  
- * IGN: ${player.inGameName}
- * GTS Message: ${player.gtsMessage}
- * Game Version: ${player.game}
- * Game Language: ${player.language}
- * Trainer Description: ${player.trainerDescription}
- * 3DS Region: ${player.consoleRegion}`;
+ - IGN: ${player.inGameName}
+ - GTS Message: ${player.gtsMessage}
+ - Game Version: ${player.game}
+ - Game Language: ${player.language}
+ - Trainer Description: ${player.trainerDescription}
+ - 3DS Region: ${player.consoleRegion}`;
 };

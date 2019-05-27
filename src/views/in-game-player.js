@@ -4,7 +4,7 @@ import { StyledDropdown } from "../components/Dropdown";
 import { StyledTextField } from "../components/TextField";
 import { ColumnLayout } from "../layouts/column-layout";
 import { passEventValue } from "../utils/pass-event-value";
-import { Gen7Messages } from "../utils/gen7-gts-messages";
+import { gen7Messages } from "../utils/gen7-gts-messages";
 import { ORASTrainers } from "../utils/oras-trainers";
 import { getGameGen } from "../utils/get-game-generation";
 
@@ -17,8 +17,11 @@ const GTSMessageTextField = ({ setPlayerProp }) => (
 
 const GTSDropdown = ({ setPlayerProp }) => (
   <StyledDropdown
+    label="GTS Message"
+    name="gtsMessage"
+    id="gtsMessage"
     onChange={passEventValue(setPlayerProp("gtsMessage"))}
-    options={Gen7Messages}
+    options={gen7Messages}
   />
 );
 
@@ -37,29 +40,49 @@ const TrainerTextField = ({ setPlayerProp }) => (
   />
 );
 
-const TrainerDropdown = ({ setPlayerProp }) => (
-  <StyledDropdown
-    onChange={passEventValue(setPlayerProp("trainerDescription"))}
-    options={ORASTrainers}
-  />
+const TrainerDropdown = ({ setPlayerProp, value }) => (
+  <React.Fragment>
+    <StyledDropdown
+      value={value}
+      label="Trainer Description"
+      name="trainerDescription"
+      id="trainerDescription"
+      onChange={passEventValue(setPlayerProp("trainerDescription"))}
+      options={ORASTrainers}
+    />
+    <a
+      href="https://archives.bulbagarden.net/wiki/Category:Player_Search_System_icons"
+      style={{ color: "#0277bd" }}
+    >
+      <Typography variant="body1" style={{ color: "#0277bd" }}>
+        List of Trainer Icons
+      </Typography>
+    </a>
+  </React.Fragment>
 );
 
-const TrainerDescriptionInput = ({ game, setPlayerProp }) => {
+const TrainerDescriptionInput = ({ game, setPlayerProp, value }) => {
   const TrainerDescription =
     game === "ORAS" ? TrainerDropdown : TrainerTextField;
 
-  return <TrainerDescription setPlayerProp={setPlayerProp} />;
+  return <TrainerDescription setPlayerProp={setPlayerProp} value={value} />;
 };
 
-export const InGamePlayerView = ({ setPlayerProp, player, children }) => {
+export const InGamePlayerView = ({
+  setPlayerProp,
+  player,
+  children,
+  state
+}) => {
   return (
     <React.Fragment>
       <ColumnLayout>
         <Typography variant="h4">Describe your in-game player</Typography>
-        <Typography variant="body1">
-          Describe what your trainer looks like
-        </Typography>
         <StyledDropdown
+          value={state.player.language}
+          label="Game Language"
+          name="gameLanguage"
+          id="gameLanguage"
           onChange={passEventValue(setPlayerProp("language"))}
           options={[
             "English",
@@ -73,6 +96,7 @@ export const InGamePlayerView = ({ setPlayerProp, player, children }) => {
           ]}
         />
         <TrainerDescriptionInput
+          value={state.player.trainerDescription}
           game={player.game}
           setPlayerProp={setPlayerProp}
         />

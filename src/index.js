@@ -82,18 +82,22 @@ const App = ({ classes }) => {
             onChangeIndex={setActiveStep}
           >
             <PickADittoView
+              state={state}
               setDittoNature={setDittoNature}
               setPlayerProp={setPlayerProp}
+              setDepositProp={setDepositProp}
             >
               {stepButtons}
             </PickADittoView>
             <DepositPokemonView
+              state={state}
               setDepositProp={setDepositProp}
               player={state.player}
             >
               {stepButtons}
             </DepositPokemonView>
             <InGamePlayerView
+              state={state}
               setPlayerProp={setPlayerProp}
               player={state.player}
             >

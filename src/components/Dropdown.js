@@ -1,6 +1,8 @@
 import React from "react";
 import { withStyles } from "@material-ui/core/styles";
 import Select from "@material-ui/core/Select";
+import FormControl from "@material-ui/core/FormControl";
+import InputLabel from "@material-ui/core/InputLabel";
 
 const styles = {
   container: {
@@ -11,31 +13,45 @@ const styles = {
     "&:focus": {
       backgroundColor: "inherit"
     }
+  },
+  formControl: {
+    minWidth: "130px",
+    maxWidth: "400px"
   }
 };
 
-const Dropdown = ({ options, classes, onChange }) => {
-  const { container: containerClassName, ...selectClasses } = classes;
-
+const Dropdown = ({
+  options,
+  classes,
+  onChange,
+  name,
+  id,
+  label,
+  ...props
+}) => {
+  const { container, formControl, ...selectClasses } = classes;
   return (
-    <div className={containerClassName}>
-      <Select
-        fullWidth
-        native
-        // value={this.state.age}
-        onChange={onChange}
-        classes={selectClasses}
-        inputProps={{
-          name: "age",
-          id: "age-native-simple"
-        }}
-      >
-        {options.map((option, index) => (
-          <option value={option} key={index}>
-            {option}
-          </option>
-        ))}
-      </Select>
+    <div className={container}>
+      <FormControl required className={formControl}>
+        <InputLabel htmlFor={id}>{label}</InputLabel>
+        <Select
+          fullWidth
+          native
+          onChange={onChange}
+          classes={selectClasses}
+          inputProps={{
+            name: name,
+            id: id
+          }}
+          {...props}
+        >
+          {options.map((option, index) => (
+            <option value={option} key={index}>
+              {option}
+            </option>
+          ))}
+        </Select>
+      </FormControl>
     </div>
   );
 };

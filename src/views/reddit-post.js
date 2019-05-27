@@ -7,13 +7,26 @@ import { StyledTextField } from "../components/TextField";
 import { ColumnLayout } from "../layouts/column-layout";
 import { copyToClipboard } from "../utils/copy-to-clipboard";
 import FileCopyIcon from "@material-ui/icons/FileCopy";
+import { withStyles } from "@material-ui/core/styles";
+
+const styles = {
+  button: {
+    margin: "5px",
+    backgroundColor: "#0277bd",
+    color: "#ffffff"
+  },
+  icon: {
+    marginLeft: "3px"
+  }
+};
 
 const ButtonWithTooltip = ({
   isTooltipOpen,
   setIsTooltipOpen,
   tooltipTitle,
   children,
-  textFieldRef
+  textFieldRef,
+  classes
 }) => {
   return (
     <ClickAwayListener onClickAway={() => setIsTooltipOpen(false)}>
@@ -34,19 +47,17 @@ const ButtonWithTooltip = ({
             copyToClipboard(textFieldRef) || setIsTooltipOpen(true)
           }
           variant="contained"
-          style={{
-            margin: "5px",
-            backgroundColor: "#0277bd",
-            color: "#ffffff"
-          }}
+          className={classes.button}
         >
           {children}
-          <FileCopyIcon fontSize="small" style={{ marginLeft: "3px" }} />
+          <FileCopyIcon fontSize="small" className={classes.icon} />
         </Button>
       </Tooltip>
     </ClickAwayListener>
   );
 };
+
+const StyledButtonWithToolTip = withStyles(styles)(ButtonWithTooltip);
 
 export const RedditPostView = ({ postText, postTitle, children }) => {
   const [isTitleTooltipOpen, setIsTitleTooltipOpen] = React.useState(false);
@@ -57,7 +68,12 @@ export const RedditPostView = ({ postText, postTitle, children }) => {
   return (
     <React.Fragment>
       <ColumnLayout>
-        <Typography variant="h4">Copy and submit your post 🎉</Typography>
+        <Typography variant="h4">
+          Copy and submit your post{" "}
+          <span role="img" aria-label="tada">
+            🎉
+          </span>
+        </Typography>
         <Typography variant="h5">Request title</Typography>
         <StyledTextField value={postTitle} inputRef={titleTextFieldRef} />
         <Typography variant="h5">Request body</Typography>
@@ -67,22 +83,22 @@ export const RedditPostView = ({ postText, postTitle, children }) => {
           inputRef={bodyTextFieldRef}
         />
       </ColumnLayout>
-      <ButtonWithTooltip
+      <StyledButtonWithToolTip
         tooltipTitle="Copied!"
         isTooltipOpen={isTitleTooltipOpen}
         setIsTooltipOpen={setIsTitleTooltipOpen}
         textFieldRef={titleTextFieldRef}
       >
         Copy Title
-      </ButtonWithTooltip>
-      <ButtonWithTooltip
+      </StyledButtonWithToolTip>
+      <StyledButtonWithToolTip
         tooltipTitle="Copied!"
         isTooltipOpen={isBodyTooltipOpen}
         setIsTooltipOpen={setIsBodyTooltipOpen}
         textFieldRef={bodyTextFieldRef}
       >
         Copy Body
-      </ButtonWithTooltip>
+      </StyledButtonWithToolTip>
       {children}
     </React.Fragment>
   );

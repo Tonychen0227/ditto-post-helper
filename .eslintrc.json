@@ -1,0 +1,31 @@
+{
+  "env": {
+    "es6": true,
+    "browser": true
+  },
+  "parser": "babel-eslint",
+  "plugins": ["prettier"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:jsx-a11y/recommended"
+  ],
+  "rules": {
+    "react/prop-types": "off",
+    "no-console": "warn",
+    "no-param-reassign": ["error"],
+    "linebreak-style": ["error", "unix"],
+    "semi": ["error", "always"],
+    "max-len": ["error", 100],
+    "keyword-spacing": ["error", { "before": true, "after": true }],
+    "indent": ["error", 2, { "SwitchCase": 1 }],
+    "no-undefined": "error",
+    "no-trailing-spaces": "error",
+    "no-tabs": "error",
+    "comma-spacing": ["error", { "before": false, "after": true }],
+    "object-curly-spacing": ["error", "always"],
+    "react/display-name": 0,
+    "jsx-a11y/anchor-is-valid": 0,
+    "react/jsx-key": 2
+  }
+}

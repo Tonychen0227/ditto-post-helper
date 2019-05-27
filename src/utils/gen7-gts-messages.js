@@ -1,4 +1,4 @@
-export const Gen7Messages = [
+export const gen7Messages = [
   "Please trade Pokemon with me. Thanks in advance.",
   "I want to trade for a Pokemon that will help me with my adventure.",
   "I want to trade for a Pokemon that is strong in battles.",
