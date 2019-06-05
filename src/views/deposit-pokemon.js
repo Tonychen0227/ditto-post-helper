@@ -1,74 +1,84 @@
 import React from "react";
+import { connect } from "react-redux";
+import { setDeposit } from "../actions";
+import partial from "lodash/partial";
 import Typography from "@material-ui/core/Typography";
-import { StyledDropdown } from "../components/Dropdown";
+import { StyledDropdown, createDropdownItems } from "../components/Dropdown";
 import { StyledTextField } from "../components/TextField";
 import { ColumnLayout } from "../layouts/column-layout";
 import { passEventValue } from "../utils/pass-event-value";
 import { getGameGen } from "../utils/get-game-generation";
 import { gen6Pokemon, gen7Pokemon } from "../utils/pokemon-deposits";
+import { pokeballs } from "../utils/pokeballs";
 
-export const DepositPokemonView = ({
-  setDepositProp,
-  player,
+const mapStateToProps = ({ deposit, player }) => ({
+  species: deposit.species,
+  ball: deposit.ball,
+  gender: deposit.gender,
+  game: player.game
+});
+
+const mapDispatchToProps = {
+  setDeposit
+};
+
+const DepositPokemonView = ({
+  game,
   children,
-  state
+  setDeposit,
+  species,
+  ball,
+  gender
 }) => {
   return (
     <React.Fragment>
       <ColumnLayout>
         <Typography variant="h4">What Pokemon will you deposit?</Typography>
         <StyledDropdown
-          value={state.deposit.species}
+          value={species}
           label="Pokemon"
           id="pokemonDeposit"
           name="pokemonDeposit"
-          onChange={passEventValue(setDepositProp("species"))}
-          options={getGameGen(player.game) === 6 ? gen6Pokemon : gen7Pokemon}
-        />
+          onChange={passEventValue(partial(setDeposit, "species"))}
+        >
+          {createDropdownItems(
+            getGameGen(game) === 6 ? gen6Pokemon : gen7Pokemon
+          )}
+        </StyledDropdown>
         <StyledDropdown
-          value={state.deposit.ball}
+          value={ball}
           label="Pokeball"
           id="pokeball"
           name="pokeball"
-          onChange={passEventValue(setDepositProp("ball"))}
-          options={[
-            "Poké Ball",
-            "Master Ball",
-            "Ultra Ball",
-            "Great Ball",
-            "Safari Ball",
-            "Net Ball",
-            "Dive Ball",
-            "Nest Ball",
-            "Repeat Ball",
-            "Timer Ball",
-            "Luxury Ball",
-            "Premier Ball",
-            "Dusk Ball",
-            "Heal Ball",
-            "Quick Ball",
-            "Other"
-          ]}
-        />
+          onChange={passEventValue(partial(setDeposit, "ball"))}
+        >
+          {createDropdownItems(pokeballs)}
+        </StyledDropdown>
         <StyledDropdown
-          value={state.deposit.gender}
+          value={gender}
           label="Gender"
           id="gender"
           name="gender"
-          onChange={passEventValue(setDepositProp("gender"))}
-          options={["Male", "Female"]}
-        />
+          onChange={passEventValue(partial(setDeposit, "gender"))}
+        >
+          {createDropdownItems(["Male", "Female"])}
+        </StyledDropdown>
         <StyledTextField
           label="Nickname"
-          onChange={passEventValue(setDepositProp("nickname"))}
+          onChange={passEventValue(partial(setDeposit, "nickname"))}
         />
         <StyledTextField
           type="number"
           label="Level"
-          onChange={passEventValue(setDepositProp("level"))}
+          onChange={passEventValue(partial(setDeposit, "level"))}
         />
       </ColumnLayout>
       {children}
     </React.Fragment>
   );
 };
+
+export const ConnectedDepositPokemonView = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(DepositPokemonView);

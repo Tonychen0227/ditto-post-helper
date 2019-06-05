@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import Tooltip from "@material-ui/core/Tooltip";
@@ -8,6 +9,12 @@ import { ColumnLayout } from "../layouts/column-layout";
 import { copyToClipboard } from "../utils/copy-to-clipboard";
 import FileCopyIcon from "@material-ui/icons/FileCopy";
 import { withStyles } from "@material-ui/core/styles";
+import { createPostText, createPostTitle } from "../utils/create-post-text";
+
+const mapStateToProps = state => ({
+  postText: createPostText(state),
+  postTitle: createPostTitle(state)
+});
 
 const styles = {
   button: {
@@ -59,7 +66,7 @@ const ButtonWithTooltip = ({
 
 const StyledButtonWithToolTip = withStyles(styles)(ButtonWithTooltip);
 
-export const RedditPostView = ({ postText, postTitle, children }) => {
+const RedditPostView = ({ postText, postTitle, children }) => {
   const [isTitleTooltipOpen, setIsTitleTooltipOpen] = React.useState(false);
   const [isBodyTooltipOpen, setIsBodyTooltipOpen] = React.useState(false);
   const titleTextFieldRef = React.useRef(null);
@@ -103,3 +110,5 @@ export const RedditPostView = ({ postText, postTitle, children }) => {
     </React.Fragment>
   );
 };
+
+export const ConnectedRedditPostView = connect(mapStateToProps)(RedditPostView);

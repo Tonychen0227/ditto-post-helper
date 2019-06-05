@@ -1,6 +1,13 @@
 import React from "react";
+import { connect } from "react-redux";
+import { setPlayer } from "../actions";
+import partial from "lodash/partial";
 import Typography from "@material-ui/core/Typography";
-import { StyledDropdown } from "../components/Dropdown";
+import {
+  StyledDropdown,
+  createImageDropdownItems,
+  createDropdownItems
+} from "../components/Dropdown";
 import { StyledTextField } from "../components/TextField";
 import { ColumnLayout } from "../layouts/column-layout";
 import { passEventValue } from "../utils/pass-event-value";
@@ -8,83 +15,87 @@ import { gen7Messages } from "../utils/gen7-gts-messages";
 import { ORASTrainers } from "../utils/oras-trainers";
 import { getGameGen } from "../utils/get-game-generation";
 
-const GTSMessageTextField = ({ setPlayerProp }) => (
+const mapStateToProps = ({ player }) => player;
+
+const mapDispatchToProps = {
+  setPlayer
+};
+
+const GTSMessageTextField = ({ setPlayer }) => (
   <StyledTextField
     label="GTS Message"
-    onChange={passEventValue(setPlayerProp("gtsMessage"))}
+    onChange={passEventValue(partial(setPlayer, "gtsMessage"))}
   />
 );
 
-const GTSDropdown = ({ setPlayerProp }) => (
+const GTSDropdown = ({ setPlayer, gtsMessage }) => (
   <StyledDropdown
+    value={gtsMessage}
     label="GTS Message"
     name="gtsMessage"
     id="gtsMessage"
-    onChange={passEventValue(setPlayerProp("gtsMessage"))}
-    options={gen7Messages}
-  />
+    onChange={passEventValue(partial(setPlayer, "gtsMessage"))}
+  >
+    {createDropdownItems(gen7Messages)}
+  </StyledDropdown>
 );
 
-const GTSMessageInput = ({ game, setPlayerProp }) => {
+const GTSMessageInput = ({ game, setPlayer, gtsMessage }) => {
   const GTSMessageComponent =
     getGameGen(game) === 6 ? GTSMessageTextField : GTSDropdown;
 
-  return <GTSMessageComponent setPlayerProp={setPlayerProp} />;
+  return <GTSMessageComponent setPlayer={setPlayer} gtsMessage={gtsMessage} />;
 };
 
-const TrainerTextField = ({ setPlayerProp }) => (
+const TrainerTextField = ({ setPlayer }) => (
   <StyledTextField
     multiline
     label="Trainer description"
-    onChange={passEventValue(setPlayerProp("trainerDescription"))}
+    onChange={passEventValue(partial(setPlayer, "trainerDescription"))}
   />
 );
 
-const TrainerDropdown = ({ setPlayerProp, value }) => (
+const TrainerDropdown = ({ setPlayer, value }) => (
   <React.Fragment>
     <StyledDropdown
       value={value}
       label="Trainer Description"
       name="trainerDescription"
       id="trainerDescription"
-      onChange={passEventValue(setPlayerProp("trainerDescription"))}
-      options={ORASTrainers}
-    />
-    <a
-      href="https://archives.bulbagarden.net/wiki/Category:Player_Search_System_icons"
-      style={{ color: "#0277bd" }}
+      onChange={passEventValue(partial(setPlayer, "trainerDescription"))}
     >
-      <Typography variant="body1" style={{ color: "#0277bd" }}>
-        List of Trainer Icons
-      </Typography>
-    </a>
+      {createImageDropdownItems(ORASTrainers)}
+    </StyledDropdown>
   </React.Fragment>
 );
 
-const TrainerDescriptionInput = ({ game, setPlayerProp, value }) => {
+const TrainerDescriptionInput = ({ game, setPlayer, value }) => {
   const TrainerDescription =
     game === "ORAS" ? TrainerDropdown : TrainerTextField;
 
-  return <TrainerDescription setPlayerProp={setPlayerProp} value={value} />;
+  return <TrainerDescription setPlayer={setPlayer} value={value} />;
 };
 
-export const InGamePlayerView = ({
-  setPlayerProp,
-  player,
+const InGamePlayerView = ({
+  setPlayer,
   children,
-  state
+  language,
+  trainerDescription,
+  game,
+  gtsMessage
 }) => {
   return (
     <React.Fragment>
       <ColumnLayout>
         <Typography variant="h4">Describe your in-game player</Typography>
         <StyledDropdown
-          value={state.player.language}
+          value={language}
           label="Game Language"
           name="gameLanguage"
           id="gameLanguage"
-          onChange={passEventValue(setPlayerProp("language"))}
-          options={[
+          onChange={passEventValue(partial(setPlayer, "language"))}
+        >
+          {createDropdownItems([
             "English",
             "Japanese",
             "French",
@@ -93,24 +104,33 @@ export const InGamePlayerView = ({
             "Spanish",
             "Korean",
             "Chinese"
-          ]}
-        />
+          ])}
+        </StyledDropdown>
         <TrainerDescriptionInput
-          value={state.player.trainerDescription}
-          game={player.game}
-          setPlayerProp={setPlayerProp}
+          value={trainerDescription}
+          game={game}
+          setPlayer={setPlayer}
         />
         <StyledTextField
           label="In game name"
-          onChange={passEventValue(setPlayerProp("inGameName"))}
+          onChange={passEventValue(partial(setPlayer, "inGameName"))}
         />
-        <GTSMessageInput game={player.game} setPlayerProp={setPlayerProp} />
+        <GTSMessageInput
+          game={game}
+          setPlayer={setPlayer}
+          gtsMessage={gtsMessage}
+        />
         <StyledTextField
           label="3DS Region"
-          onChange={passEventValue(setPlayerProp("consoleRegion"))}
+          onChange={passEventValue(partial(setPlayer, "consoleRegion"))}
         />
       </ColumnLayout>
       {children}
     </React.Fragment>
   );
 };
+
+export const ConnectedInGamePlayerView = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(InGamePlayerView);
