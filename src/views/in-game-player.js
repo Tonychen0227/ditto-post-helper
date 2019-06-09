@@ -2,7 +2,11 @@ import React from "react";
 import { connect } from "react-redux";
 import { setPlayer } from "../actions";
 import partial from "lodash/partial";
+import HelpOutlineIcon from "@material-ui/icons/HelpOutline";
 import Typography from "@material-ui/core/Typography";
+import IconButton from "@material-ui/core/IconButton";
+import Tooltip from "@material-ui/core/Tooltip";
+import { withStyles } from "@material-ui/core/styles";
 import {
   StyledDropdown,
   createImageDropdownItems,
@@ -19,6 +23,15 @@ const mapStateToProps = ({ player }) => player;
 
 const mapDispatchToProps = {
   setPlayer
+};
+
+const styles = {
+  tooltip: {
+    backgroundColor: "#f5f5f9",
+    color: "rgba(0, 0, 0, 0.87)",
+    maxWidth: 220,
+    border: "1px solid #dadde9"
+  }
 };
 
 const GTSMessageTextField = ({ setPlayer }) => (
@@ -47,12 +60,54 @@ const GTSMessageInput = ({ game, setPlayer, gtsMessage }) => {
   return <GTSMessageComponent setPlayer={setPlayer} gtsMessage={gtsMessage} />;
 };
 
+const tooltipTitle = (
+  <React.Fragment>
+    <Typography variant="subtitle1">Trainer Description</Typography>
+    <Typography variant="body2">
+      You can find how your trainer appears on the GTS by looking at your
+      Trainer Card or Trainer Passport in-game
+    </Typography>
+  </React.Fragment>
+);
+
+const CustomTooltip = ({ classes, children }) => (
+  <Tooltip
+    disableTouchListener
+    placement="top"
+    title={tooltipTitle}
+    classes={classes}
+  >
+    {children}
+  </Tooltip>
+);
+
+const StyledTooltip = withStyles(styles)(CustomTooltip);
+
 const TrainerTextField = ({ setPlayer }) => (
-  <StyledTextField
-    multiline
-    label="Trainer description"
-    onChange={passEventValue(partial(setPlayer, "trainerDescription"))}
-  />
+  <React.Fragment>
+    <StyledTextField
+      multiline
+      label="Trainer description"
+      onChange={passEventValue(partial(setPlayer, "trainerDescription"))}
+    />
+    <Typography variant="body2">
+      <StyledTooltip>
+        <IconButton color="primary">
+          <HelpOutlineIcon fontSize="small" />
+        </IconButton>
+      </StyledTooltip>
+      Describe how your trainer looks in-game
+    </Typography>
+    <Typography variant="body2">
+      Clothing Lists:{" "}
+      <a href="https://www.serebii.net/xy/customisation.shtml">XY</a> |{" "}
+      <a href="https://www.serebii.net/sunmoon/customisation.shtml">Sun/Moon</a>{" "}
+      |{" "}
+      <a href="https://www.serebii.net/ultrasunultramoon/customisation.shtml">
+        Ultra Sun/Ultra Moon
+      </a>
+    </Typography>
+  </React.Fragment>
 );
 
 const TrainerDropdown = ({ setPlayer, value }) => (
