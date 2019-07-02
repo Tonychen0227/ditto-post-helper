@@ -93,6 +93,7 @@ const PickADittoView = ({
       </ColumnLayout>
       <a
         href="https://www.reddit.com/r/morebreedingdittos/wiki/dittos"
+        target="_blank" rel="noreferrer noopener"
         style={{ color: "#0277bd" }}
       >
         <Typography variant="body1" style={{ color: "#0277bd" }}>

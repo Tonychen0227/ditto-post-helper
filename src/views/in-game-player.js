@@ -100,10 +100,13 @@ const TrainerTextField = ({ setPlayer }) => (
     </Typography>
     <Typography variant="body2">
       Clothing Lists:{" "}
-      <a href="https://www.serebii.net/xy/customisation.shtml">XY</a> |{" "}
-      <a href="https://www.serebii.net/sunmoon/customisation.shtml">Sun/Moon</a>{" "}
+      <a href="https://www.serebii.net/xy/customisation.shtml"
+        target="_blank" rel="noreferrer noopener">XY</a> |{" "}
+      <a href="https://www.serebii.net/sunmoon/customisation.shtml"
+        target="_blank" rel="noreferrer noopener">Sun/Moon</a>{" "}
       |{" "}
-      <a href="https://www.serebii.net/ultrasunultramoon/customisation.shtml">
+      <a href="https://www.serebii.net/ultrasunultramoon/customisation.shtml"
+        target="_blank" rel="noreferrer noopener">
         Ultra Sun/Ultra Moon
       </a>
     </Typography>

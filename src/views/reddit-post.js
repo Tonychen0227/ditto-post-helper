@@ -20,7 +20,8 @@ const styles = {
   button: {
     margin: "5px",
     backgroundColor: "#0277bd",
-    color: "#ffffff"
+    color: "#fff",
+    "&:hover": { color: "#000" }
   },
   icon: {
     marginLeft: "3px"
