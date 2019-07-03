@@ -83,7 +83,7 @@ const App = ({ classes, setActiveStep, activeStep }) => {
         variant="caption"
         align="center"
         color="textPrimary"
-        gutterBottom="true"
+        gutterBottom={true}
       >
         Created and maintained by /u/Shiny_Sylveon
       </Typography>
