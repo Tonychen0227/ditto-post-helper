@@ -10,6 +10,7 @@ import { copyToClipboard } from "../utils/copy-to-clipboard";
 import FileCopyIcon from "@material-ui/icons/FileCopy";
 import { withStyles } from "@material-ui/core/styles";
 import { createPostText, createPostTitle } from "../utils/create-post-text";
+import OpenInNewIcon from "@material-ui/icons/OpenInNew";
 
 const mapStateToProps = state => ({
   postText: createPostText(state),
@@ -58,14 +59,25 @@ const ButtonWithTooltip = ({
           className={classes.button}
         >
           {children}
-          <FileCopyIcon fontSize="small" className={classes.icon} />
         </Button>
       </Tooltip>
     </ClickAwayListener>
   );
 };
 
+const LinkButton = ({ classes, children }) => (
+  <Button variant="contained" className={classes.button}>
+    {children}
+  </Button>
+);
+
+const FileCopy = ({ classes }) => (
+  <FileCopyIcon fontSize="small" className={classes.icon} />
+);
+
+const StyledButton = withStyles(styles)(LinkButton);
 const StyledButtonWithToolTip = withStyles(styles)(ButtonWithTooltip);
+const StyledFileCopyIcon = withStyles(styles)(FileCopy);
 
 const RedditPostView = ({ postText, postTitle, children }) => {
   const [isTitleTooltipOpen, setIsTitleTooltipOpen] = React.useState(false);
@@ -98,6 +110,7 @@ const RedditPostView = ({ postText, postTitle, children }) => {
         textFieldRef={titleTextFieldRef}
       >
         Copy Title
+        <StyledFileCopyIcon />
       </StyledButtonWithToolTip>
       <StyledButtonWithToolTip
         tooltipTitle="Copied!"
@@ -106,7 +119,21 @@ const RedditPostView = ({ postText, postTitle, children }) => {
         textFieldRef={bodyTextFieldRef}
       >
         Copy Body
+        <StyledFileCopyIcon />
       </StyledButtonWithToolTip>
+      <StyledButton>
+        <a
+          href="https://www.reddit.com/r/morebreedingdittos/submit"
+          target="_blank"
+          rel="noreferrer noopener"
+          style={{ textDecoration: "none" }}
+        >
+          <Typography variant="button" color="secondary">
+            Create a post
+          </Typography>
+        </a>
+        <OpenInNewIcon />
+      </StyledButton>
       {children}
     </React.Fragment>
   );
