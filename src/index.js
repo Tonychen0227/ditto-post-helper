@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import flow from "lodash/flow";
 import { MuiThemeProvider, withStyles } from "@material-ui/core/styles";
+import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import SwipeableViews from "react-swipeable-views";
 import { StyledAppBar } from "./components/AppBar";
@@ -78,6 +79,14 @@ const App = ({ classes, setActiveStep, activeStep }) => {
           </SwipeableViews>
         </div>
       </div>
+      <Typography
+        variant="caption"
+        align="center"
+        color="textPrimary"
+        gutterBottom="true"
+      >
+        Created and maintained by /u/Shiny_Sylveon
+      </Typography>
     </MuiThemeProvider>
   );
 };
