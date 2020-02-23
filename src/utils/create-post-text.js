@@ -31,6 +31,5 @@ export const createPostText = ({ dittoNature, player, deposit }) => {
  - GTS Message: ${player.gtsMessage}
  - Game Version: ${player.game}
  - Game Language: ${player.language}
- - Trainer Description: ${player.trainerDescription}
- - 3DS Region: ${player.consoleRegion}`;
+ - Trainer Description: ${player.trainerDescription}`;
 };
