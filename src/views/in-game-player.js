@@ -15,7 +15,7 @@ import {
 import { StyledTextField } from "../components/TextField";
 import { ColumnLayout } from "../layouts/column-layout";
 import { passEventValue } from "../utils/pass-event-value";
-import { gen7Messages } from "../utils/gen7-gts-messages";
+import { gtsMessages } from "../utils/gts-messages";
 import { ORASTrainers } from "../utils/oras-trainers";
 import { getGameGen } from "../utils/get-game-generation";
 
@@ -49,7 +49,7 @@ const GTSDropdown = ({ setPlayer, gtsMessage }) => (
     id="gtsMessage"
     onChange={passEventValue(partial(setPlayer, "gtsMessage"))}
   >
-    {createDropdownItems(gen7Messages)}
+    {createDropdownItems(gtsMessages)}
   </StyledDropdown>
 );
 
@@ -100,13 +100,27 @@ const TrainerTextField = ({ setPlayer }) => (
     </Typography>
     <Typography variant="body2">
       Clothing Lists:{" "}
-      <a href="https://www.serebii.net/xy/customisation.shtml"
-        target="_blank" rel="noreferrer noopener">XY</a> |{" "}
-      <a href="https://www.serebii.net/sunmoon/customisation.shtml"
-        target="_blank" rel="noreferrer noopener">Sun/Moon</a>{" "}
+      <a
+        href="https://www.serebii.net/xy/customisation.shtml"
+        target="_blank"
+        rel="noreferrer noopener"
+      >
+        XY
+      </a>{" "}
       |{" "}
-      <a href="https://www.serebii.net/ultrasunultramoon/customisation.shtml"
-        target="_blank" rel="noreferrer noopener">
+      <a
+        href="https://www.serebii.net/sunmoon/customisation.shtml"
+        target="_blank"
+        rel="noreferrer noopener"
+      >
+        Sun/Moon
+      </a>{" "}
+      |{" "}
+      <a
+        href="https://www.serebii.net/ultrasunultramoon/customisation.shtml"
+        target="_blank"
+        rel="noreferrer noopener"
+      >
         Ultra Sun/Ultra Moon
       </a>
     </Typography>

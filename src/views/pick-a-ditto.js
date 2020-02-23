@@ -7,7 +7,7 @@ import { ColumnLayout } from "../layouts/column-layout";
 import { passEventValue } from "../utils/pass-event-value";
 import { gen6Pokemon, gen7Pokemon } from "../utils/pokemon-deposits";
 import { getGameGen } from "../utils/get-game-generation";
-import { gen7Messages } from "../utils/gen7-gts-messages";
+import { gtsMessages } from "../utils/gts-messages";
 import { ORASTrainers } from "../utils/oras-trainers";
 
 const mapStateToProps = ({ dittoNature, player }) => ({
@@ -32,7 +32,7 @@ const PickADittoView = ({
   const onChangeGame = game => {
     const isGenSixGame = getGameGen(game) === 6;
     const defaultPokemon = isGenSixGame ? gen6Pokemon[0] : gen7Pokemon[0];
-    const defaultGTSMessage = isGenSixGame ? "" : gen7Messages[0];
+    const defaultGTSMessage = isGenSixGame ? "" : gtsMessages[0];
     const description = game === "ORAS" ? ORASTrainers[0] : "";
     setPlayer("game", game);
     setPlayer("trainerDescription", description);
@@ -93,7 +93,8 @@ const PickADittoView = ({
       </ColumnLayout>
       <a
         href="https://www.reddit.com/r/morebreedingdittos/wiki/dittos"
-        target="_blank" rel="noreferrer noopener"
+        target="_blank"
+        rel="noreferrer noopener"
         style={{ color: "#0277bd" }}
       >
         <Typography variant="body1" style={{ color: "#0277bd" }}>
