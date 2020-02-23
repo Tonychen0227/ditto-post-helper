@@ -1,15 +1,19 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { setDeposit } from '../actions';
-import partial from 'lodash/partial';
-import Typography from '@material-ui/core/Typography';
-import { StyledDropdown, createDropdownItems } from '../components/Dropdown';
-import { StyledTextField } from '../components/TextField';
-import { ColumnLayout } from '../layouts/column-layout';
-import { passEventValue } from '../utils/pass-event-value';
-import { getGameGen } from '../utils/get-game-generation';
-import { gen6Pokemon, gen7Pokemon, gen8Pokemon } from '../utils/pokemon-deposits';
-import { pokeballs } from '../utils/pokeballs';
+import React from "react";
+import { connect } from "react-redux";
+import { setDeposit } from "../actions";
+import partial from "lodash/partial";
+import Typography from "@material-ui/core/Typography";
+import { StyledDropdown, createDropdownItems } from "../components/Dropdown";
+import { StyledTextField } from "../components/TextField";
+import { ColumnLayout } from "../layouts/column-layout";
+import { passEventValue } from "../utils/pass-event-value";
+import { getGameGen } from "../utils/get-game-generation";
+import {
+  gen6Pokemon,
+  gen7Pokemon,
+  gen8Pokemon
+} from "../utils/pokemon-deposits";
+import { pokeballs } from "../utils/pokeballs";
 
 const mapStateToProps = ({ deposit, player }) => ({
   species: deposit.species,
@@ -39,10 +43,14 @@ const DepositPokemonView = ({
           label="Pokemon"
           id="pokemonDeposit"
           name="pokemonDeposit"
-          onChange={passEventValue(partial(setDeposit, 'species'))}
+          onChange={passEventValue(partial(setDeposit, "species"))}
         >
           {createDropdownItems(
-            getGameGen(game) === 6 ? gen6Pokemon : gen7Pokemon
+            getGameGen(game) === 6
+              ? gen6Pokemon
+              : getGameGen(game) === 8
+              ? gen8Pokemon
+              : gen7Pokemon
           )}
         </StyledDropdown>
         <StyledDropdown
@@ -50,7 +58,7 @@ const DepositPokemonView = ({
           label="Pokeball"
           id="pokeball"
           name="pokeball"
-          onChange={passEventValue(partial(setDeposit, 'ball'))}
+          onChange={passEventValue(partial(setDeposit, "ball"))}
         >
           {createDropdownItems(pokeballs)}
         </StyledDropdown>
@@ -59,18 +67,18 @@ const DepositPokemonView = ({
           label="Gender"
           id="gender"
           name="gender"
-          onChange={passEventValue(partial(setDeposit, 'gender'))}
+          onChange={passEventValue(partial(setDeposit, "gender"))}
         >
-          {createDropdownItems(['Male', 'Female'])}
+          {createDropdownItems(["Male", "Female"])}
         </StyledDropdown>
         <StyledTextField
           type="number"
           label="Level"
-          onChange={passEventValue(partial(setDeposit, 'level'))}
+          onChange={passEventValue(partial(setDeposit, "level"))}
         />
         <StyledTextField
           label="Nickname"
-          onChange={passEventValue(partial(setDeposit, 'nickname'))}
+          onChange={passEventValue(partial(setDeposit, "nickname"))}
         />
         <Typography variant="body2">
           Nickname the Pokemon to your Reddit username!

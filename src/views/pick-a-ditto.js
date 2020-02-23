@@ -5,7 +5,11 @@ import Typography from "@material-ui/core/Typography";
 import { StyledDropdown, createDropdownItems } from "../components/Dropdown";
 import { ColumnLayout } from "../layouts/column-layout";
 import { passEventValue } from "../utils/pass-event-value";
-import { gen6Pokemon, gen7Pokemon } from "../utils/pokemon-deposits";
+import {
+  gen6Pokemon,
+  gen7Pokemon,
+  gen8Pokemon
+} from "../utils/pokemon-deposits";
 import { getGameGen } from "../utils/get-game-generation";
 import { gtsMessages } from "../utils/gts-messages";
 import { ORASTrainers } from "../utils/oras-trainers";
@@ -31,7 +35,12 @@ const PickADittoView = ({
 }) => {
   const onChangeGame = game => {
     const isGenSixGame = getGameGen(game) === 6;
-    const defaultPokemon = isGenSixGame ? gen6Pokemon[0] : gen7Pokemon[0];
+    const isGenEightGame = getGameGen(game) === 8;
+    const defaultPokemon = isGenSixGame
+      ? gen6Pokemon[0]
+      : isGenEightGame
+      ? gen8Pokemon[0]
+      : gen7Pokemon[0];
     const defaultGTSMessage = isGenSixGame ? "" : gtsMessages[0];
     const description = game === "ORAS" ? ORASTrainers[0] : "";
     setPlayer("game", game);
