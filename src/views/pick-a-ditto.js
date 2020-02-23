@@ -65,7 +65,8 @@ const PickADittoView = ({
     "ORAS",
     "XY",
     "Sun/Moon",
-    "Ultra Sun/Ultra Moon"
+    "Ultra Sun/Ultra Moon",
+    "Sword/Shield"
   ]);
 
   return (
