@@ -17,6 +17,7 @@ import { ColumnLayout } from "../layouts/column-layout";
 import { passEventValue } from "../utils/pass-event-value";
 import { gtsMessages } from "../utils/gts-messages";
 import { ORASTrainers } from "../utils/oras-trainers";
+import { SWSHTrainers } from "../utils/swsh-trainers";
 import { getGameGen } from "../utils/get-game-generation";
 
 const mapStateToProps = ({ player }) => player;
@@ -127,7 +128,7 @@ const TrainerTextField = ({ setPlayer }) => (
   </React.Fragment>
 );
 
-const TrainerDropdown = ({ setPlayer, value }) => (
+const ORASTrainerDropdown = ({ setPlayer, value }) => (
   <React.Fragment>
     <StyledDropdown
       value={value}
@@ -141,9 +142,27 @@ const TrainerDropdown = ({ setPlayer, value }) => (
   </React.Fragment>
 );
 
+const SWSHTrainerDropdown = ({ setPlayer, value }) => (
+  <React.Fragment>
+    <StyledDropdown
+      value={value}
+      label="Trainer Description"
+      name="trainerDescription"
+      id="trainerDescription"
+      onChange={passEventValue(partial(setPlayer, "trainerDescription"))}
+    >
+      {createImageDropdownItems(SWSHTrainers)}
+    </StyledDropdown>
+  </React.Fragment>
+);
+
 const TrainerDescriptionInput = ({ game, setPlayer, value }) => {
   const TrainerDescription =
-    game === "ORAS" ? TrainerDropdown : TrainerTextField;
+    game === "ORAS"
+      ? ORASTrainerDropdown
+      : game === "Sword/Shield"
+      ? SWSHTrainerDropdown
+      : TrainerTextField;
 
   return <TrainerDescription setPlayer={setPlayer} value={value} />;
 };

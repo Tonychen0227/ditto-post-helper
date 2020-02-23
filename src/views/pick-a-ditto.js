@@ -13,6 +13,7 @@ import {
 import { getGameGen } from "../utils/get-game-generation";
 import { gtsMessages } from "../utils/gts-messages";
 import { ORASTrainers } from "../utils/oras-trainers";
+import { SWSHTrainers } from "../utils/swsh-trainers";
 
 const mapStateToProps = ({ dittoNature, player }) => ({
   dittoNature: dittoNature,
@@ -42,7 +43,12 @@ const PickADittoView = ({
       ? gen8Pokemon[0]
       : gen7Pokemon[0];
     const defaultGTSMessage = isGenSixGame ? "" : gtsMessages[0];
-    const description = game === "ORAS" ? ORASTrainers[0] : "";
+    const description =
+      game === "ORAS"
+        ? ORASTrainers[0]
+        : game === "Sword/Shield"
+        ? SWSHTrainers[0].name
+        : "";
     setPlayer("game", game);
     setPlayer("trainerDescription", description);
     setPlayer("gtsMessage", defaultGTSMessage);
