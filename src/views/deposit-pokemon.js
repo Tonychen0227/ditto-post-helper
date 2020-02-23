@@ -8,7 +8,7 @@ import { StyledTextField } from '../components/TextField';
 import { ColumnLayout } from '../layouts/column-layout';
 import { passEventValue } from '../utils/pass-event-value';
 import { getGameGen } from '../utils/get-game-generation';
-import { gen6Pokemon, gen7Pokemon } from '../utils/pokemon-deposits';
+import { gen6Pokemon, gen7Pokemon, gen8Pokemon } from '../utils/pokemon-deposits';
 import { pokeballs } from '../utils/pokeballs';
 
 const mapStateToProps = ({ deposit, player }) => ({

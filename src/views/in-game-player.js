@@ -178,10 +178,6 @@ const InGamePlayerView = ({
           setPlayer={setPlayer}
           gtsMessage={gtsMessage}
         />
-        <StyledTextField
-          label="3DS Region"
-          onChange={passEventValue(partial(setPlayer, "consoleRegion"))}
-        />
       </ColumnLayout>
       {children}
     </React.Fragment>
