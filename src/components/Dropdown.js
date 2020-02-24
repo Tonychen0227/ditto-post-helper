@@ -19,7 +19,7 @@ const styles = {
     display: "flex"
   },
   formControl: {
-    minWidth: "130px",
+    minWidth: "150px",
     maxWidth: "100%"
   }
 };
