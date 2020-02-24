@@ -20,7 +20,7 @@ const styles = {
   },
   formControl: {
     minWidth: "150px",
-    maxWidth: "100%"
+    maxWidth: "300px"
   }
 };
 

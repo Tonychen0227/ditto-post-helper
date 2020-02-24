@@ -6,7 +6,6 @@ const useStyles = makeStyles(theme => ({
   paper: {
     maxWidth: "500px",
     margin: "10px auto",
-    padding: "20px 40px",
     display: "flex",
     flexDirection: "column",
     alignItems: "center"
