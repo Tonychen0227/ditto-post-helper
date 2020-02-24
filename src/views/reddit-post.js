@@ -5,10 +5,10 @@ import Button from "@material-ui/core/Button";
 import Tooltip from "@material-ui/core/Tooltip";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import { StyledTextField } from "../components/TextField";
-import { ColumnLayout } from "../layouts/column-layout";
 import { copyToClipboard } from "../utils/copy-to-clipboard";
 import FileCopyIcon from "@material-ui/icons/FileCopy";
 import { withStyles } from "@material-ui/core/styles";
+import { PaperLayout } from "../components/Paper";
 import { createPostText, createPostTitle } from "../utils/create-post-text";
 import OpenInNewIcon from "@material-ui/icons/OpenInNew";
 
@@ -87,7 +87,7 @@ const RedditPostView = ({ postText, postTitle, children }) => {
 
   return (
     <React.Fragment>
-      <ColumnLayout>
+      <PaperLayout>
         <Typography variant="h4">
           Copy and submit your post{" "}
           <span role="img" aria-label="tada">
@@ -102,39 +102,39 @@ const RedditPostView = ({ postText, postTitle, children }) => {
           value={postText}
           inputRef={bodyTextFieldRef}
         />
-      </ColumnLayout>
-      <StyledButtonWithToolTip
-        tooltipTitle="Copied!"
-        isTooltipOpen={isTitleTooltipOpen}
-        setIsTooltipOpen={setIsTitleTooltipOpen}
-        textFieldRef={titleTextFieldRef}
-      >
-        Copy Title
-        <StyledFileCopyIcon />
-      </StyledButtonWithToolTip>
-      <StyledButtonWithToolTip
-        tooltipTitle="Copied!"
-        isTooltipOpen={isBodyTooltipOpen}
-        setIsTooltipOpen={setIsBodyTooltipOpen}
-        textFieldRef={bodyTextFieldRef}
-      >
-        Copy Body
-        <StyledFileCopyIcon />
-      </StyledButtonWithToolTip>
-      <StyledButton>
-        <a
-          href="https://www.reddit.com/r/morebreedingdittos/submit"
-          target="_blank"
-          rel="noreferrer noopener"
-          style={{ textDecoration: "none" }}
+        <StyledButtonWithToolTip
+          tooltipTitle="Copied!"
+          isTooltipOpen={isTitleTooltipOpen}
+          setIsTooltipOpen={setIsTitleTooltipOpen}
+          textFieldRef={titleTextFieldRef}
         >
-          <Typography variant="button" color="secondary">
-            Create a post
-          </Typography>
-        </a>
-        <OpenInNewIcon />
-      </StyledButton>
-      {children}
+          Copy Title
+          <StyledFileCopyIcon />
+        </StyledButtonWithToolTip>
+        <StyledButtonWithToolTip
+          tooltipTitle="Copied!"
+          isTooltipOpen={isBodyTooltipOpen}
+          setIsTooltipOpen={setIsBodyTooltipOpen}
+          textFieldRef={bodyTextFieldRef}
+        >
+          Copy Body
+          <StyledFileCopyIcon />
+        </StyledButtonWithToolTip>
+        <StyledButton>
+          <a
+            href="https://www.reddit.com/r/morebreedingdittos/submit"
+            target="_blank"
+            rel="noreferrer noopener"
+            style={{ textDecoration: "none" }}
+          >
+            <Typography variant="button" color="secondary">
+              Create a post
+            </Typography>
+          </a>
+          <OpenInNewIcon />
+        </StyledButton>
+        {children}
+      </PaperLayout>
     </React.Fragment>
   );
 };

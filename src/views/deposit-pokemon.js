@@ -3,9 +3,9 @@ import { connect } from "react-redux";
 import { setDeposit } from "../actions";
 import partial from "lodash/partial";
 import Typography from "@material-ui/core/Typography";
+import { PaperLayout } from "../components/Paper";
 import { StyledDropdown, createDropdownItems } from "../components/Dropdown";
 import { StyledTextField } from "../components/TextField";
-import { ColumnLayout } from "../layouts/column-layout";
 import { passEventValue } from "../utils/pass-event-value";
 import { getGameGen } from "../utils/get-game-generation";
 import {
@@ -36,7 +36,7 @@ const DepositPokemonView = ({
 }) => {
   return (
     <React.Fragment>
-      <ColumnLayout>
+      <PaperLayout>
         <Typography variant="h4">What Pokemon will you deposit?</Typography>
         <StyledDropdown
           value={species}
@@ -83,8 +83,8 @@ const DepositPokemonView = ({
         <Typography variant="body2">
           Nickname the Pokemon to your Reddit username!
         </Typography>
-      </ColumnLayout>
-      {children}
+        {children}
+      </PaperLayout>
     </React.Fragment>
   );
 };

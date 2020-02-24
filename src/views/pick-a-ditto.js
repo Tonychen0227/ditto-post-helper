@@ -2,8 +2,8 @@ import React from "react";
 import { connect } from "react-redux";
 import { setDittoNature, setDeposit, setPlayer } from "../actions";
 import Typography from "@material-ui/core/Typography";
+import { PaperLayout } from "../components/Paper";
 import { StyledDropdown, createDropdownItems } from "../components/Dropdown";
-import { ColumnLayout } from "../layouts/column-layout";
 import { passEventValue } from "../utils/pass-event-value";
 import {
   gen6Pokemon,
@@ -86,7 +86,7 @@ const PickADittoView = ({
 
   return (
     <React.Fragment>
-      <ColumnLayout>
+      <PaperLayout>
         <Typography variant="h4">Pick your Ditto</Typography>
         <StyledDropdown
           value={dittoNature}
@@ -106,18 +106,18 @@ const PickADittoView = ({
         >
           {gameDropdownItems}
         </StyledDropdown>
-      </ColumnLayout>
-      <a
-        href="https://www.reddit.com/r/morebreedingdittos/wiki/dittos"
-        target="_blank"
-        rel="noreferrer noopener"
-        style={{ color: "#0277bd" }}
-      >
-        <Typography variant="body1" style={{ color: "#0277bd" }}>
-          List of Ditto IVs and Natures
-        </Typography>
-      </a>
-      {children}
+        <a
+          href="https://www.reddit.com/r/morebreedingdittos/wiki/dittos"
+          target="_blank"
+          rel="noreferrer noopener"
+          style={{ color: "#0277bd" }}
+        >
+          <Typography variant="body1" style={{ color: "#0277bd" }}>
+            List of Ditto IVs and Natures
+          </Typography>
+        </a>
+        {children}
+      </PaperLayout>
     </React.Fragment>
   );
 };
