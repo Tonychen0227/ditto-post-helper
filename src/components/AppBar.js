@@ -6,6 +6,7 @@ import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import GithubCircle from "mdi-material-ui/GithubCircle";
 import Reddit from "mdi-material-ui/Reddit";
+import Discord from "mdi-material-ui/Discord";
 
 const styles = {
   root: {
@@ -28,6 +29,9 @@ const AppBar = ({ classes }) => {
           <Typography variant="h6" color="inherit" className={classes.grow}>
             Ditto Post Helper
           </Typography>
+          <IconButton target="_blank" href="https://discord.gg/dittos">
+            <Discord color="secondary" />
+          </IconButton>
           <IconButton
             target="_blank"
             href="https://www.reddit.com/r/morebreedingdittos/"
