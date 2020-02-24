@@ -4,6 +4,7 @@ import flow from "lodash/flow";
 import { MuiThemeProvider, withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
+import SendIcon from "@material-ui/icons/Send";
 import SwipeableViews from "react-swipeable-views";
 import { StyledAppBar } from "./components/AppBar";
 import { StyledStepper } from "./components/Stepper";
@@ -34,7 +35,8 @@ const styles = theme => ({
     }
   },
   contentContainer: { margin: "4rem 1rem" },
-  buttonContainer: { marginTop: "1rem" }
+  buttonContainer: { marginTop: "1rem" },
+  button: { margin: 5 }
 });
 
 const App = ({ classes, setActiveStep, activeStep }) => {
@@ -50,8 +52,27 @@ const App = ({ classes, setActiveStep, activeStep }) => {
   };
   const stepButtons = (
     <div className={classes.buttonContainer}>
-      {activeStep > 0 && <Button onClick={decreaseActiveStep}>Previous</Button>}
-      {activeStep < 3 && <Button onClick={increaseActiveStep}>Next</Button>}
+      {activeStep > 0 && (
+        <Button
+          variant="contained"
+          color="primary"
+          className={classes.button}
+          onClick={decreaseActiveStep}
+        >
+          Previous
+        </Button>
+      )}
+      {activeStep < 3 && (
+        <Button
+          variant="contained"
+          color="primary"
+          className={classes.button}
+          endIcon={<SendIcon />}
+          onClick={increaseActiveStep}
+        >
+          Next
+        </Button>
+      )}
     </div>
   );
 
@@ -93,10 +114,7 @@ const App = ({ classes, setActiveStep, activeStep }) => {
 
 const connectComponent = flow(
   withStyles(styles),
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )
+  connect(mapStateToProps, mapDispatchToProps)
 );
 
 const ConnectedApp = connectComponent(App);
