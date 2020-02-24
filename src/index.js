@@ -18,10 +18,11 @@ import { Provider } from "react-redux";
 import { store } from "./store";
 import { connect } from "react-redux";
 
-const mapStateToProps = ({ activeStep, dittoNature, player }) => ({
+const mapStateToProps = ({ activeStep, dittoNature, player, deposit }) => ({
   activeStep: activeStep,
   dittoNature,
-  game: player.game
+  game: player.game,
+  deposit
 });
 
 const mapDispatchToProps = {
@@ -41,10 +42,10 @@ const styles = theme => ({
   button: { margin: 5 }
 });
 
-// don't allow requesting of HP Dittos for Gen 8
-const checkInput = (dittoNature, game) => {
+// don't allow requesting of HP Dittos for Gen 8 or level 1 deposits
+const checkInput = (dittoNature, game, deposit) => {
   return (
-    [
+    ([
       "HP Fighting",
       "HP Fire",
       "HP Flying",
@@ -52,11 +53,20 @@ const checkInput = (dittoNature, game) => {
       "HP Ground",
       "HP Ice",
       "HP Rock"
-    ].includes(dittoNature) && ["Sword/Shield"].includes(game)
+    ].includes(dittoNature) &&
+      ["Sword/Shield"].includes(game)) ||
+    deposit.level === "1"
   );
 };
 
-const App = ({ classes, setActiveStep, activeStep, dittoNature, game }) => {
+const App = ({
+  classes,
+  setActiveStep,
+  activeStep,
+  dittoNature,
+  game,
+  deposit
+}) => {
   const increaseActiveStep = () => {
     const step = Math.min(activeStep + 1, 3);
 
@@ -88,7 +98,7 @@ const App = ({ classes, setActiveStep, activeStep, dittoNature, game }) => {
           className={classes.button}
           endIcon={<SendIcon />}
           onClick={increaseActiveStep}
-          disabled={checkInput(dittoNature, game)}
+          disabled={checkInput(dittoNature, game, deposit)}
         >
           Next
         </Button>
