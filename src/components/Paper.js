@@ -4,7 +4,7 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 
 const useStyles = makeStyles(theme => ({
   paper: {
-    maxWidth: "380px",
+    maxWidth: "500px",
     margin: "10px auto",
     padding: "20px 40px",
     display: "flex",
