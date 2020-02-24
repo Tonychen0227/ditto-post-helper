@@ -98,6 +98,7 @@ const RedditPostView = ({ postText, postTitle, children }) => {
         <StyledTextField value={postTitle} inputRef={titleTextFieldRef} />
         <Typography variant="h5">Request body</Typography>
         <StyledTextField
+          fullWidth
           multiline
           value={postText}
           inputRef={bodyTextFieldRef}

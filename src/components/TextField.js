@@ -5,7 +5,8 @@ const styles = {
   root: {
     marginTop: "1rem",
     marginBottom: "1rem",
-    maxWidth: 150
+    maxWidth: 300,
+    width: "100%"
   }
 };
 
