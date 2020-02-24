@@ -103,24 +103,26 @@ const RedditPostView = ({ postText, postTitle, children }) => {
           value={postText}
           inputRef={bodyTextFieldRef}
         />
-        <StyledButtonWithToolTip
-          tooltipTitle="Copied!"
-          isTooltipOpen={isTitleTooltipOpen}
-          setIsTooltipOpen={setIsTitleTooltipOpen}
-          textFieldRef={titleTextFieldRef}
-        >
-          Copy Title
-          <StyledFileCopyIcon />
-        </StyledButtonWithToolTip>
-        <StyledButtonWithToolTip
-          tooltipTitle="Copied!"
-          isTooltipOpen={isBodyTooltipOpen}
-          setIsTooltipOpen={setIsBodyTooltipOpen}
-          textFieldRef={bodyTextFieldRef}
-        >
-          Copy Body
-          <StyledFileCopyIcon />
-        </StyledButtonWithToolTip>
+        <div style={{ display: "flex", flexDirection: "row" }}>
+          <StyledButtonWithToolTip
+            tooltipTitle="Copied!"
+            isTooltipOpen={isTitleTooltipOpen}
+            setIsTooltipOpen={setIsTitleTooltipOpen}
+            textFieldRef={titleTextFieldRef}
+          >
+            Copy Title
+            <StyledFileCopyIcon />
+          </StyledButtonWithToolTip>
+          <StyledButtonWithToolTip
+            tooltipTitle="Copied!"
+            isTooltipOpen={isBodyTooltipOpen}
+            setIsTooltipOpen={setIsBodyTooltipOpen}
+            textFieldRef={bodyTextFieldRef}
+          >
+            Copy Body
+            <StyledFileCopyIcon />
+          </StyledButtonWithToolTip>
+        </div>
         <StyledButton>
           <a
             href="https://www.reddit.com/r/morebreedingdittos/submit"
