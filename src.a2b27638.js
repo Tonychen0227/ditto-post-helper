@@ -91034,9 +91034,15 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 var mapStateToProps = function mapStateToProps(_ref) {
-  var activeStep = _ref.activeStep;
+  var activeStep = _ref.activeStep,
+      dittoNature = _ref.dittoNature,
+      player = _ref.player,
+      deposit = _ref.deposit;
   return {
-    activeStep: activeStep
+    activeStep: activeStep,
+    dittoNature: dittoNature,
+    game: player.game,
+    deposit: deposit
   };
 };
 
@@ -91062,12 +91068,20 @@ var styles = function styles(theme) {
       margin: 5
     }
   };
+}; // don't allow requesting of HP Dittos for Gen 8 or level 1 deposits
+
+
+var checkInput = function checkInput(dittoNature, game, deposit) {
+  return ["HP Fighting", "HP Fire", "HP Flying", "HP Grass", "HP Ground", "HP Ice", "HP Rock"].includes(dittoNature) && ["Sword/Shield"].includes(game) || deposit.level === "1";
 };
 
 var App = function App(_ref2) {
   var classes = _ref2.classes,
       setActiveStep = _ref2.setActiveStep,
-      activeStep = _ref2.activeStep;
+      activeStep = _ref2.activeStep,
+      dittoNature = _ref2.dittoNature,
+      game = _ref2.game,
+      deposit = _ref2.deposit;
 
   var increaseActiveStep = function increaseActiveStep() {
     var step = Math.min(activeStep + 1, 3);
@@ -91091,7 +91105,8 @@ var App = function App(_ref2) {
     color: "primary",
     className: classes.button,
     endIcon: _react.default.createElement(_Send.default, null),
-    onClick: increaseActiveStep
+    onClick: increaseActiveStep,
+    disabled: checkInput(dittoNature, game, deposit)
   }, "Next"));
 
   return _react.default.createElement(_styles.MuiThemeProvider, {
@@ -91149,7 +91164,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54797" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56848" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
