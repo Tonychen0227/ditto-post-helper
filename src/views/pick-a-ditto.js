@@ -5,6 +5,7 @@ import Typography from "@material-ui/core/Typography";
 import { PaperLayout } from "../components/Paper";
 import { StyledDropdown, createDropdownItems } from "../components/Dropdown";
 import { passEventValue } from "../utils/pass-event-value";
+import { natureDropdownItems } from "../utils/ditto-types";
 import {
   gen6Pokemon,
   gen7Pokemon,
@@ -54,28 +55,7 @@ const PickADittoView = ({
     setPlayer("gtsMessage", defaultGTSMessage);
     setDeposit("species", defaultPokemon);
   };
-  const natureDropdownItems = createDropdownItems([
-    "Adamant",
-    "Brave",
-    "Bold",
-    "Relaxed",
-    "Impish",
-    "Timid",
-    "Jolly",
-    "Naive",
-    "Modest",
-    "Quiet",
-    "Calm",
-    "Sassy",
-    "Careful",
-    "HP Fighting",
-    "HP Fire",
-    "HP Flying",
-    "HP Grass",
-    "HP Ground",
-    "HP Ice",
-    "HP Rock"
-  ]);
+
   const gameDropdownItems = createDropdownItems([
     "ORAS",
     "XY",
