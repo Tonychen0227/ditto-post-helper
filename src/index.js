@@ -18,8 +18,10 @@ import { Provider } from "react-redux";
 import { store } from "./store";
 import { connect } from "react-redux";
 
-const mapStateToProps = ({ activeStep }) => ({
-  activeStep: activeStep
+const mapStateToProps = ({ activeStep, dittoNature, player }) => ({
+  activeStep: activeStep,
+  dittoNature,
+  game: player.game
 });
 
 const mapDispatchToProps = {
@@ -39,17 +41,34 @@ const styles = theme => ({
   button: { margin: 5 }
 });
 
-const App = ({ classes, setActiveStep, activeStep }) => {
+// don't allow requesting of HP Dittos for Gen 8
+const checkInput = (dittoNature, game) => {
+  return (
+    [
+      "HP Fighting",
+      "HP Fire",
+      "HP Flying",
+      "HP Grass",
+      "HP Ground",
+      "HP Ice",
+      "HP Rock"
+    ].includes(dittoNature) && ["Sword/Shield"].includes(game)
+  );
+};
+
+const App = ({ classes, setActiveStep, activeStep, dittoNature, game }) => {
   const increaseActiveStep = () => {
     const step = Math.min(activeStep + 1, 3);
 
     setActiveStep(step);
   };
+
   const decreaseActiveStep = () => {
     const step = Math.max(activeStep - 1, 0);
 
     setActiveStep(step);
   };
+
   const stepButtons = (
     <div className={classes.buttonContainer}>
       {activeStep > 0 && (
@@ -69,6 +88,7 @@ const App = ({ classes, setActiveStep, activeStep }) => {
           className={classes.button}
           endIcon={<SendIcon />}
           onClick={increaseActiveStep}
+          disabled={checkInput(dittoNature, game)}
         >
           Next
         </Button>
