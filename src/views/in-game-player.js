@@ -205,7 +205,7 @@ const InGamePlayerView = ({
           classes={classes}
         />
         <StyledTextField
-          label="In game name"
+          label="In game name/Pokemon HOME name"
           onChange={passEventValue(partial(setPlayer, "inGameName"))}
         />
         <GTSMessageInput

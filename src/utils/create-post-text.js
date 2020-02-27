@@ -27,7 +27,7 @@ export const createPostText = ({ dittoNature, player, deposit }) => {
  
  ---
  
- - IGN: ${player.inGameName}
+ - IGN/HOME Name: ${player.inGameName}
  - GTS Message: ${player.gtsMessage}
  - Game Version: ${player.game}
  - Game Language: ${player.language}
